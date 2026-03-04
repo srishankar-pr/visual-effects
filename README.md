@@ -67,7 +67,7 @@ python ascii_art.py
 ### How It Works
 
 1. The input image is converted to **grayscale**.
-2. A **4×4 Bayer matrix** is tiled across the entire image to create a threshold map:
+2. The image is conceptually divided into repeating **4×4 blocks**, each aligned with the **Bayer threshold matrix**:
    ```
    ┌─────────────────┐
    │  0   8   2  10  │
@@ -76,8 +76,9 @@ python ascii_art.py
    │ 15   7  13   5  │
    └─────────────────┘
    ```
-3. Each pixel is compared against the threshold map — if brighter than the threshold, it becomes **white (255)**; otherwise, **black (0)**.
-4. The result is a crisp, retro-style dithered image reminiscent of early computer graphics.
+3. The Bayer matrix is tiled across the entire image so every pixel maps to a threshold value from its corresponding position in the 4×4 block.
+4. Each pixel is then **compared** against its Bayer threshold — if the pixel brightness exceeds the threshold, it becomes **white (255)**; otherwise, **black (0)**.
+5. The result is a crisp, retro-style dithered image with a characteristic crosshatch pattern, reminiscent of early computer graphics and newspaper print.
 
 ### Parameters
 
